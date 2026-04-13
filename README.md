@@ -1,147 +1,123 @@
-<p align="center">
-  <img src="docs/banner.png" alt="Punjab Fisheries – Digital Transformation" width="100%">
-</p>
+# Rakizat AI HRMS
 
-<h1 align="center">Punjab Fisheries – Digital Transformation Platform</h1>
+AI-powered HR Management System for **Rakizat.com.sa** built with **Laravel 13**.
 
-<p align="center">
-  <a href="https://laravel.com" target="_blank"><img src="https://img.shields.io/badge/Laravel-12.x-ff2d20?style=flat-square&logo=laravel" alt="Laravel"></a>
-  <a href="https://www.php.net/" target="_blank"><img src="https://img.shields.io/badge/PHP-8.4-blue?style=flat-square&logo=php" alt="PHP"></a>
-  <a href="https://redis.io" target="_blank"><img src="https://img.shields.io/badge/Redis-Enabled-red?style=flat-square&logo=redis" alt="Redis"></a>
-  <a href="https://tailwindcss.com" target="_blank"><img src="https://img.shields.io/badge/TailwindCSS-3.x-38bdf8?style=flat-square&logo=tailwind-css" alt="TailwindCSS"></a>
-  <a href="https://alpinejs.dev" target="_blank"><img src="https://img.shields.io/badge/Alpine.js-3.x-77c1d2?style=flat-square&logo=alpine.js" alt="Alpine.js"></a>
-  <a href="https://axios-http.com" target="_blank"><img src="https://img.shields.io/badge/Axios-Ready-purple?style=flat-square&logo=axios" alt="Axios"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License"></a>
-</p>
+This platform is designed for modern HR operations with a strong focus on:
+
+- attendance and biometric device integration
+- employee management
+- shifts and working hours
+- leave and absence handling
+- dashboards and reporting
+- secure API ingestion
+- future AI-powered HR workflows
 
 ---
 
-## 📖 Overview
+## Project Overview
 
-The **Punjab Fisheries – Digital Transformation Platform** is the official modernization project for the Punjab Fisheries Department, developed to enhance public access, streamline internal workflows, and integrate AI-powered services.
+**Rakizat AI HRMS** is a scalable enterprise-ready Human Resource Management System designed to integrate biometric attendance devices such as **ZKTeco MB2000** and **UFace800** with a Laravel-based dashboard and API platform.
 
-It includes:
-- GIS-enabled maps for fishery resources
-- AI chatbot & FAQ powered by **KurmaAI/AQUA-7B** via Hugging Face API
-- Content management for news, services, and resources
-- SEO automation for better reach
-- Role-based admin panel for departmental operations
+The system follows a clean architecture:
 
-**Repository:** [punjabfisheries.gov.pk](https://github.com/skdevelopers/punjabfisheries.gov.pk)  
-**Production Target:** https://punjabfisheries.gov.pk
+- **Laravel 13** for the web application, API, dashboard, and business logic
+- **Python ZK Client** as a separate service for polling attendance devices
+- **PostgreSQL or MySQL** for application data storage
+- **SQLite locally on device client** for resilient edge buffering
+- AI-ready foundation for advanced HR intelligence and automation
 
 ---
 
-## 🚀 Key Features
+## Core Modules
 
-- **Modern Laravel Stack** (Laravel 12.x, PHP 8.4)
-- **PostgreSQL / MySQL** support
-- **Redis** for caching, queues, and sessions
-- **TailwindCSS + Alpine.js + Axios** for reactive UI
-- **RBAC** via Spatie Laravel Permission
-- **Admin Dashboard** CMS ready
-- **AI Chat & FAQ** powered by Hugging Face OpenAI Deep Seek AI
-- **API-ready** with Laravel Sanctum
-- **SEO Automation**
-- **GIS Mapping** support with optional PostGIS
-
----
-
-## 🛠 Tech Stack
-
-| Layer           | Technology                         |
-|-----------------|------------------------------------|
-| **Backend**     | Laravel 12.x (PHP 8.4)             |
-| **Frontend**    | TailwindCSS, Alpine.js, Axios      |
-| **Database**    | PostgreSQL / MySQL Optional        |
-| **Caching/Queue**| Redis                              |
-| **Auth**        | Laravel Breeze (Blade) + Sanctum   |
-| **RBAC**        | Spatie Laravel Permission          |
-| **AI**          | Hugging Face API – KurmaAI/AQUA-7B |
-| **Build Tool**  | Vite                               |
-| **Hosting**     | Nginx + PHP-FPM + Redis            |
+- Authentication and RBAC
+- Sites / Branches
+- Devices
+- Employees
+- Attendance Logs
+- Attendance Dashboard
+- Shifts
+- Leaves
+- Reports
+- API Ingest for attendance clients
+- AI-ready HR assistant layer
 
 ---
 
-## 📦 Installation (Local – WSL Ubuntu)
+## Architecture
+
+### Main Application
+- Laravel 13
+- PHP 8.3+
+- PostgreSQL recommended
+- Blade + Alpine.js + Axios
+- Secure JSON API ingest for attendance clients
+
+### Device Integration
+Biometric devices do **not** push directly into the dashboard reliably.  
+Instead, a dedicated Python client polls devices periodically and syncs normalized logs into the Laravel API.
+
+This provides:
+
+- better reliability
+- no log loss
+- audit trail support
+- retry-safe synchronization
+- clean device isolation
+
+---
+
+## Attendance Flow
+
+1. Device client polls ZKTeco devices periodically
+2. Raw device events are stored locally in SQLite
+3. Valid normalized events are added to outbox
+4. Outbox records are sent to Laravel API
+5. Laravel stores logs idempotently
+6. Dashboard displays live device status and attendance logs
+
+---
+
+## AI Strategy
+
+AI is used for **HR intelligence**, not for core attendance integrity.
+
+Recommended AI use cases:
+
+- attendance anomaly summaries
+- leave policy Q&A
+- HR assistant
+- employee insights
+- report generation
+- future AI workflow automation
+
+Core attendance ingest remains deterministic and non-AI.
+
+---
+
+## Tech Stack
+
+- Laravel 13
+- PHP 8.3+
+- PostgreSQL / MySQL
+- Blade
+- Alpine.js
+- Axios
+- Python ZK client
+- SQLite (edge buffering)
+- Nginx / Apache
+- Optional Laravel AI SDK for advanced AI features
+
+---
+
+## Installation
 
 ```bash
-# Clone repository
-git clone https://github.com/skdevelopers/punjabfisheries.gov.pk.git
-cd punjabfisheries.gov.pk
+git clone https://github.com/skdevelopers/rakizat-ai-hrms.git
+cd rakizat-ai-hrms
 
-# Install PHP dependencies
 composer install
-
-# Install JS dependencies
-npm install
-
-# Copy env & set key
 cp .env.example .env
 php artisan key:generate
-
-# Configure .env for DB, Redis, Hugging Face, Open AI, Deep Seek API
-nano .env
-
-# Run migrations & seed
-php artisan migrate --seed
-
-# Build frontend
-npm run dev
-
-# Serve
+php artisan migrate
 php artisan serve
-
-💬 AI Chatbot
-Create a Hugging Face account.
-
-Create an Open AI account.
-
-Create a Deep Seek AI account.
-
-Generate an Access Token.
-
-Set in .env:
-
-env
-
-HUGGINGFACE_API_TOKEN=hf_xxx
-HUGGINGFACE_MODEL_ID=KurmaAI/AQUA-7B Or OPenAI API
-Login and visit /chat to interact with the AI bot.
-
-📍 Admin Panel
-URL: /admin/dashboard (after login)
-
-Default Roles: admin, staff, viewer
-
-RBAC managed by Spatie Laravel Permission
-
-🗺 GIS Support
-Optional PostGIS integration:
-
-Install PostGIS on your PostgreSQL server
-
-Use Laravel spatial data types for maps
-
-Integrate with Leaflet.js or Mapbox
-
-🛡 Security
-Uses Laravel Sanctum for API token authentication
-
-CSRF protection enabled
-
-Redis-backed sessions for better security
-
-RBAC limits access to sensitive modules
-
-📜 License
-This project is licensed under the MIT License. See LICENSE for details.
-
-👥 Credits
-Punjab Fisheries Department – Project Owner
-
-Lead Developer: Mian Salman (CTO, TeqTronics Systems)
-
-AI Model: KurmaAI/AQUA-7B
-
-Framework: Laravel
