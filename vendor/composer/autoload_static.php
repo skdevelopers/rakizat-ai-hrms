@@ -141,9 +141,9 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
             'League\\CommonMark\\' => 18,
             'Laravel\\Tinker\\' => 15,
             'Laravel\\SerializableClosure\\' => 28,
+            'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
-            'Laravel\\Pail\\' => 13,
         ),
         'J' => 
         array (
@@ -468,6 +468,10 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
         ),
+        'Laravel\\Sanctum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/sanctum/src',
+        ),
         'Laravel\\Sail\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
@@ -475,10 +479,6 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
         'Laravel\\Prompts\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
-        ),
-        'Laravel\\Pail\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pail/src',
         ),
         'Jean85\\' => 
         array (
@@ -588,6 +588,9 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\VerifyAttendanceSync' => __DIR__ . '/../..' . '/app/Console/Commands/VerifyAttendanceSync.php',
+        'App\\Http\\Controllers\\AttendanceDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/AttendanceDashboardController.php',
+        'App\\Http\\Controllers\\AttendanceIngestController' => __DIR__ . '/../..' . '/app/Http/Controllers/AttendanceIngestController.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PagesController.php',
@@ -2990,21 +2993,6 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
         'Jean85\\Exception\\VersionMissingExceptionInterface' => __DIR__ . '/..' . '/jean85/pretty-package-versions/src/Exception/VersionMissingExceptionInterface.php',
         'Jean85\\PrettyVersions' => __DIR__ . '/..' . '/jean85/pretty-package-versions/src/PrettyVersions.php',
         'Jean85\\Version' => __DIR__ . '/..' . '/jean85/pretty-package-versions/src/Version.php',
-        'Laravel\\Pail\\Console\\Commands\\PailCommand' => __DIR__ . '/..' . '/laravel/pail/src/Console/Commands/PailCommand.php',
-        'Laravel\\Pail\\Contracts\\Printer' => __DIR__ . '/..' . '/laravel/pail/src/Contracts/Printer.php',
-        'Laravel\\Pail\\File' => __DIR__ . '/..' . '/laravel/pail/src/File.php',
-        'Laravel\\Pail\\Files' => __DIR__ . '/..' . '/laravel/pail/src/Files.php',
-        'Laravel\\Pail\\Guards\\EnsurePcntlIsAvailable' => __DIR__ . '/..' . '/laravel/pail/src/Guards/EnsurePcntlIsAvailable.php',
-        'Laravel\\Pail\\Handler' => __DIR__ . '/..' . '/laravel/pail/src/Handler.php',
-        'Laravel\\Pail\\LoggerFactory' => __DIR__ . '/..' . '/laravel/pail/src/LoggerFactory.php',
-        'Laravel\\Pail\\Options' => __DIR__ . '/..' . '/laravel/pail/src/Options.php',
-        'Laravel\\Pail\\PailServiceProvider' => __DIR__ . '/..' . '/laravel/pail/src/PailServiceProvider.php',
-        'Laravel\\Pail\\Printers\\CliPrinter' => __DIR__ . '/..' . '/laravel/pail/src/Printers/CliPrinter.php',
-        'Laravel\\Pail\\ProcessFactory' => __DIR__ . '/..' . '/laravel/pail/src/ProcessFactory.php',
-        'Laravel\\Pail\\ValueObjects\\MessageLogged' => __DIR__ . '/..' . '/laravel/pail/src/ValueObjects/MessageLogged.php',
-        'Laravel\\Pail\\ValueObjects\\Origin\\Console' => __DIR__ . '/..' . '/laravel/pail/src/ValueObjects/Origin/Console.php',
-        'Laravel\\Pail\\ValueObjects\\Origin\\Http' => __DIR__ . '/..' . '/laravel/pail/src/ValueObjects/Origin/Http.php',
-        'Laravel\\Pail\\ValueObjects\\Origin\\Queue' => __DIR__ . '/..' . '/laravel/pail/src/ValueObjects/Origin/Queue.php',
         'Laravel\\Prompts\\Clear' => __DIR__ . '/..' . '/laravel/prompts/src/Clear.php',
         'Laravel\\Prompts\\Concerns\\Colors' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Colors.php',
         'Laravel\\Prompts\\Concerns\\Cursor' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Cursor.php',
@@ -3068,6 +3056,26 @@ class ComposerStaticInitadb4b680144df947b976ddb89b6572b1
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
         'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
+        'Laravel\\Sanctum\\Console\\Commands\\PruneExpired' => __DIR__ . '/..' . '/laravel/sanctum/src/Console/Commands/PruneExpired.php',
+        'Laravel\\Sanctum\\Contracts\\HasAbilities' => __DIR__ . '/..' . '/laravel/sanctum/src/Contracts/HasAbilities.php',
+        'Laravel\\Sanctum\\Contracts\\HasApiTokens' => __DIR__ . '/..' . '/laravel/sanctum/src/Contracts/HasApiTokens.php',
+        'Laravel\\Sanctum\\Events\\TokenAuthenticated' => __DIR__ . '/..' . '/laravel/sanctum/src/Events/TokenAuthenticated.php',
+        'Laravel\\Sanctum\\Exceptions\\MissingAbilityException' => __DIR__ . '/..' . '/laravel/sanctum/src/Exceptions/MissingAbilityException.php',
+        'Laravel\\Sanctum\\Exceptions\\MissingScopeException' => __DIR__ . '/..' . '/laravel/sanctum/src/Exceptions/MissingScopeException.php',
+        'Laravel\\Sanctum\\Guard' => __DIR__ . '/..' . '/laravel/sanctum/src/Guard.php',
+        'Laravel\\Sanctum\\HasApiTokens' => __DIR__ . '/..' . '/laravel/sanctum/src/HasApiTokens.php',
+        'Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Controllers/CsrfCookieController.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\AuthenticateSession' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\CheckAbilities' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/CheckAbilities.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyAbility' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/CheckForAnyAbility.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyScope' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/CheckForAnyScope.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\CheckScopes' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/CheckScopes.php',
+        'Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful' => __DIR__ . '/..' . '/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php',
+        'Laravel\\Sanctum\\NewAccessToken' => __DIR__ . '/..' . '/laravel/sanctum/src/NewAccessToken.php',
+        'Laravel\\Sanctum\\PersonalAccessToken' => __DIR__ . '/..' . '/laravel/sanctum/src/PersonalAccessToken.php',
+        'Laravel\\Sanctum\\Sanctum' => __DIR__ . '/..' . '/laravel/sanctum/src/Sanctum.php',
+        'Laravel\\Sanctum\\SanctumServiceProvider' => __DIR__ . '/..' . '/laravel/sanctum/src/SanctumServiceProvider.php',
+        'Laravel\\Sanctum\\TransientToken' => __DIR__ . '/..' . '/laravel/sanctum/src/TransientToken.php',
         'Laravel\\SerializableClosure\\Contracts\\Serializable' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Contracts/Serializable.php',
         'Laravel\\SerializableClosure\\Contracts\\Signer' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Contracts/Signer.php',
         'Laravel\\SerializableClosure\\Exceptions\\InvalidSignatureException' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Exceptions/InvalidSignatureException.php',

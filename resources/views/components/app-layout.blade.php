@@ -26,7 +26,7 @@
         rel="stylesheet" />
     <script>
         /**
-         * THIS SCRIPT REQUIRED FOR PREVENT FLICKERING IN SOME BROWSERS
+         * THIS SCRIPT REQUIRED FOR PREVENTION FLICKERING IN SOME BROWSERS
          */
         localStorage.getItem("_x_darkMode_on") === "true" &&
             document.documentElement.classList.add("dark");

@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'fastapi' => [
+        'url' => env('FASTAPI_URL', 'https://rakizat.com.sa:9001'),
+    ],
+
 ];

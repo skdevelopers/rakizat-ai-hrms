@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -17,34 +18,42 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'email' => ['required', 'email', 'exists:users'],
+            'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput();
         }
 
-        $validated = $validator->validated();
+        $credentials = $validator->validated();
 
-        if (\Auth::attempt(array('email' => $validated['email'], 'password' => $validated['password']))) {
-            return redirect()->route('index');
-        } else {
-            $validator->errors()->add(
-                'password', 'The password does not match with username'
-            );
-            return redirect()->back()->withErrors($validator)->withInput();
+        $user = User::where('email', $credentials['email'])->first();
+
+        // 🔐 Force bcrypt safety (Laravel 12 compliant)
+        if (!str_starts_with($user->password, '$2y$')) {
+            return back()->withErrors([
+                'password' => 'Password hash is invalid. Please reset your password.',
+            ]);
         }
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('attendance.dashboard');
+        }
+
+        return back()->withErrors([
+            'password' => 'The password does not match with username',
+        ])->withInput();
     }
+
 
     public function registerView(){
         return view('register');
     }
 
     public function register(Request $request){
-        
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string'],
             'email' => ['required', 'email','unique:users'],
@@ -61,7 +70,7 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('index');
+        return redirect()->route('attendance.dashboard');
     }
 
     public function logout()

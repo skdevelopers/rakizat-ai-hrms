@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AttendanceDashboardController;
+use App\Http\Controllers\AttendanceIngestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +24,26 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
+
+Route::prefix('dashboard/attendance')->middleware(['auth'])->group(function () {
+    Route::get('/', [AttendanceDashboardController::class, 'index'])->name('attendance.dashboard');
+
+    Route::get('/devices', [AttendanceDashboardController::class, 'devices']);
+    Route::get('/status/{site}', [AttendanceDashboardController::class, 'status']);
+    Route::get('/device/{site}/{deviceSn}', [AttendanceDashboardController::class, 'deviceLogs']);
+
+    // ✅ SSE stream (hardened)
+    Route::get('/stream', [AttendanceDashboardController::class, 'stream']);
+
+    // ✅ Sync button (no FastAPI) – just forces frontend refresh; keep endpoint stable
+    Route::post('/sync', [AttendanceDashboardController::class, 'sync']);
+});
+
+
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/', [PagesController::class, 'dashboardsCrmAnalytics'])->name('index');
+
 
     Route::get('/elements/avatar', [PagesController::class, 'elementsAvatar'])->name('elements/avatar');
     Route::get('/elements/alert', [PagesController::class, 'elementsAlert'])->name('elements/alert');

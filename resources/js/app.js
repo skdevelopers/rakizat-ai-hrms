@@ -1,3 +1,5 @@
+import './bootstrap';
+
 import Alpine from "alpinejs";
 
 // AlpineJS Plugins
